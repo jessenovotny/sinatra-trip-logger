@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815011330) do
+ActiveRecord::Schema.define(version: 20160815222351) do
 
   create_table "sports", force: :cascade do |t|
     t.string "name"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20160815011330) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string  "name"
     t.string  "about"
     t.integer "state_id"
     t.integer "sport_id"
