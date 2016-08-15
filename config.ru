@@ -7,8 +7,9 @@ end
 use Rack::MethodOverride
 use Rack::Flash
 
-use UsersController
-use TripsController
-use SportsController
+use UserController
+use TripController
+use SportController
+use StateController
 
 run ApplicationController
