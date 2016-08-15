@@ -6,17 +6,17 @@ class SportController < ApplicationController
   end
 
   ### all trips for a given sport
-  get '/trips/sports/:sport_id' do
+  get '/trips/sports/:sport_slug' do
     erb :'sports/show_trips'
   end
 
   ### all states for a given sport
-  get '/states/sports/:sport_id' do
+  get '/states/sports/:sport_slug' do
     erb :'sports/show_states'
   end
 
   ### all users in a given sport
-  get '/users/sports/:sport_id' do
+  get '/users/sports/:sport_slug' do
     erb :'sports/show_users'
   end
 

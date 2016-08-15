@@ -24,17 +24,18 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
+    #verify no fields were left blank.
     #create new user
   end
 
   ### LOGOUT ###
   get '/logout' do
-    logout
+    logout if logged_in?
     redirect '/'
   end
 
   ### USER'S POSTS ###
-  get 'user/:user_slug'
+  get 'user/:user_slug' do
     @user = User.find_by_slug(params[:user_slug])
     erb :'user/show'
   end

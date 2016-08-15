@@ -6,6 +6,7 @@ class TripController < ApplicationController
   end
 
   post '/trip/new' do
+    #verify logged in, otherwise prompt to login or signup. 
     #create new trip
   end
 
