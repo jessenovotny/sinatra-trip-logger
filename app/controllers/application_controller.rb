@@ -7,7 +7,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
-  #Homepage
+  helper_method :logged_in?, :login, :logout
+
+  ### HOMEPAGE ###
   get '/' do
     erb :index
   end
