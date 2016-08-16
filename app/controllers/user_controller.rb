@@ -2,14 +2,18 @@ class UserController < ApplicationController
 
   ### LOGIN ###
   get '/login' do
-    erb :'users/login'
+    if !logged_in?
+      erb :'users/login'
+    else
+      redirect '/'
+    end
   end
 
   post '/login' do
     if !params[:username].empty? && !params[:password].empty?
       login(params[:username], params[:password])
     else
-      # flash[:message] = "Please enter a valid username and password."
+      flash[:message] = "Please enter a valid username and password."
       redirect '/login'
     end
   end

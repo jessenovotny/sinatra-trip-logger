@@ -2,6 +2,15 @@
 Links to login, signup or logout depending on whether user is logged in or not. "Login or Sign Up to Start Logging Trips Today!"
 Shows all trips
  -->
+<% if logged_in? %>
+  <h2>Welcome <%= current_user.username %>!</h2>
+  <a href="/trip/new">Log New Trip</a><br>
+  <a href="/logout">Logout</a>
+<% else %>
+  <h2>Welcome to Trip Logger!</h2>
+  <h3><a href="/login">Login</a> or <a href="/signup">Signup</a> to start logging trips!</h3>
+<% end %>
+
 
 <form action="/trips/by-state" method="post">
   

@@ -1,0 +1,17 @@
+<h2>Login to Trip Logger</h2>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form action="/login" method="post">
+  <label>Username:</label>
+  <input type="text" name="username"><br>
+
+  <label>Password:</label>
+  <input type="text" name="password"><br>
+  
+  <input type="submit" name="submit">
+
+</form>
+

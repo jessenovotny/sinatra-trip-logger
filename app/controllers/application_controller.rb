@@ -5,6 +5,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
+    use Rack::Flash
   end
 
   ### HOMEPAGE ###
@@ -34,8 +35,9 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(username: username)
       if user && user.authenticate(password)
         session[:user_id] = user.id
+        redirect '/'
       else
-        #create flash message
+        flash[:message] = "Username or password not found. Please try again."
         redirect '/login'
       end
     end
