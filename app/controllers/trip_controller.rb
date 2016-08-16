@@ -1,5 +1,7 @@
 class TripController < ApplicationController
 
+
+
   ### LOG NEW TRIP ###
   get '/trip/new' do
     erb :'trips/new'
@@ -22,9 +24,43 @@ class TripController < ApplicationController
   end
 
   ### DELETE TRIP ###
-  post '/trip/:trip_id/delete' do
+  post '/trip/:trip/delete' do
     #verify logged in user is trip owner
     #delete trip
   end
+
+  get '/trip/all_states/:sport' do
+    # SHOW ALL TRIPS PER GIVEN SPORT
+  end
+
+  get '/trip/all_sports/:state' do
+    # SHOW ALL TRIPS PER GIVEN STATE
+  end
+
+  get '/trip/:sport_id/:state' do
+    # ALL TRIPS PER GIVEN SPORT AND STATE
+  end
+
+  get '/trips/by-state/:state' do
+    @state = State.find_by_slug(params[:state])
+    binding.pry
+    erb :'trips'
+  end
+
+  get '/trips/by-sport/:sport' do
+    @sport = Sport.find_by_slug(params[:sport])
+    binding.pry
+    erb :'/trips/by_sport'
+  end
+
+
+
+
+
+
+
+
+
+
 
 end

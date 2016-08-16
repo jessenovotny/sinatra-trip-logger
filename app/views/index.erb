@@ -2,3 +2,32 @@
 Links to login, signup or logout depending on whether user is logged in or not. "Login or Sign Up to Start Logging Trips Today!"
 Shows all trips
  -->
+
+<form action="/trips/by-state" method="post">
+  
+  <select name="state_id">
+    <% @states.each do |state| %>
+      <option value="<%= state.id %>"><%= state.name %></option>
+    <% end %>
+  </select>
+  <button type="submit">Filter by State:</button>
+</form>
+
+<form action="/trips/by-sport" method="post">
+  <select name="sport_id">
+    <% @sports.each do |sport| %>
+      <option value="<%= sport.id %>"><%= sport.name %></option>
+    <% end %>
+  </select>
+  <button type="submit">Filter by Sport:</button>
+</form>
+
+
+<br>
+<h3>All Trips</h3>
+<ol>
+<% @trips.each do |trip| %>
+  <li><%= trip.user.username %> in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a>:</li>
+  "<%= trip.about %>"<br>
+  See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips</p><br>
+<% end %>

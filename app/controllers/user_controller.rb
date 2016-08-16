@@ -2,14 +2,14 @@ class UserController < ApplicationController
 
   ### LOGIN ###
   get '/login' do
-    erb :login
+    erb :'users/login'
   end
 
   post '/login' do
     if !params[:username].empty? && !params[:password].empty?
       login(params[:username], params[:password])
     else
-      flash[:message] = "Please enter a valid username and password."
+      # flash[:message] = "Please enter a valid username and password."
       redirect '/login'
     end
   end
@@ -24,8 +24,14 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    #verify no fields were left blank.
-    #create new user
+    if !params[:user][:username].empty? && !params[:user][:email].empty? && !params[:user][:password].empty?
+      user = User.create(params[:user])
+      # flash[:message] = "Account successfully created"
+      redirect "/"
+    else
+      # flash[:message] = "Please enter a valid username, email, and password."
+      redirect "/signup"
+    end
   end
 
   ### LOGOUT ###
