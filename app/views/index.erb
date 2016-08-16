@@ -36,7 +36,7 @@
   "<%= trip.about %>"<br>
   See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips<br>
   <% if current_user == trip.user %>
-    <a href="/trip/<%= trip.id %>/edit">Edit</a> or <a href="/trip/<%= trip.id %>/delete">Delete</a> trip
+    <a href="/trip/<%= trip.id %>/edit">Edit</a> trip
   <% end %></p>
 
 <% end %>

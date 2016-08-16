@@ -47,9 +47,10 @@ class UserController < ApplicationController
   end
 
   ### USER'S POSTS ###
-  get 'user/:user_slug' do
+  get '/user/:user_slug' do
     @user = User.find_by_slug(params[:user_slug])
-    erb :'user/show'
+    @trips = @user.trips
+    erb :'users/show'
   end
 
 end

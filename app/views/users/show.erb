@@ -1,0 +1,13 @@
+Showing all trips by <%= @user.username %>:
+
+<ol>
+<% @trips.each do |trip| %>
+  <li>Logged in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a>:</li>
+  "<%= trip.about %>"<br>
+  See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips<br>
+  <% if current_user == trip.user %>
+    <a href="/trip/<%= trip.id %>/edit">Edit</a> trip
+  <% end %></p>
+
+<% end %>
+</ol>

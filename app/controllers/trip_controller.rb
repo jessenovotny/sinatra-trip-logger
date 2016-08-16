@@ -33,18 +33,31 @@ class TripController < ApplicationController
 
   ### EDIT TRIP ###
   get '/trip/:trip_id/edit' do
-    #verify logged in user is trip owner
-    erb :'trips/edit'
+    @trip = Trip.find(params[:trip_id])
+    if @trip.user == current_user
+      @user = current_user
+      @sports = Sport.all
+      @states = State.all
+      erb :'trips/edit'
+    else
+      redirect '/'
+    end
   end
 
   post '/trip/:trip_id/edit' do
+    binding.pry
     #update trip
   end
 
   ### DELETE TRIP ###
-  post '/trip/:trip/delete' do
-    #verify logged in user is trip owner
-    #delete trip
+  delete '/trip/:trip_id/delete' do
+    trip = Trip.find(params[:trip_id])
+    if trip.user == current_user
+      trip.delete 
+      redirect "/user/#{current_user.slug}"
+    else
+      redirect "/user/#{current_user.slug}"
+    end
   end
 
   ### SEARCH BY STATE ###
