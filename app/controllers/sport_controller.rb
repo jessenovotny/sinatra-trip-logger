@@ -7,7 +7,7 @@ class SportController < ApplicationController
   end
 
   ### all trips for a given sport
-  get '/sports/trips/:sport_slug' do
+  get '/sport/trip/:sport_slug' do
     @sport = Sport.find_by_slug(params[:sport_slug])
     @trips = @sport.trips
     erb :'sports/show_trips'
@@ -20,7 +20,7 @@ class SportController < ApplicationController
     erb :'sports/show_states'
   end
 
-  ### all users in a given sport
+  ### all users in a g iven sport
   get '/sports/users/:sport_slug' do
     @sport = Sport.find_by_slug(params[:sport_slug])
     @users = @sport.users

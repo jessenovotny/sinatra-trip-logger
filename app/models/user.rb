@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :states, :through => :trips
   has_many :sports, :through => :trips
 
+  has_secure_password
+
   def slug
     username.downcase.gsub(" ", "-")
   end

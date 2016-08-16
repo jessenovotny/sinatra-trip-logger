@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
 
   ### HOMEPAGE ###
   get '/' do
-    @trips = Trip.all
+    @trips = Trip.all.reverse
     @states = []
     @sports = []
     @trips.each do |trip|
@@ -19,19 +19,6 @@ class ApplicationController < Sinatra::Base
     @states.uniq!
     @sports.uniq!
     erb :index
-  end
-
-  ### SEARCH ###
-  post '/trips/by-state' do
-    state = State.find(params[:state_id]).slug
-    session[:filter_state] = state
-    redirect "/trips/by-state/#{state}"
-  end
-
-  post '/trips/by-sport' do
-    sport = Sport.find(params[:sport_id]).slug
-    session[:filter_sport] = sport
-    redirect "/trips/by-sport/#{sport}"
   end
 
   helpers do
@@ -46,7 +33,7 @@ class ApplicationController < Sinatra::Base
     def login username, password
       user = User.find_by(username: username)
       if user && user.authenticate(password)
-        session[:user_id] = user.username
+        session[:user_id] = user.id
       else
         #create flash message
         redirect '/login'

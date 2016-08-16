@@ -1,0 +1,36 @@
+<h1>Log a new trip:</h1>
+
+
+<form action="/trip/new" method="post">
+  <label>Describe your Trip!</label><br>
+  <textarea name="trip[about]"></textarea>
+
+  <br><br>
+  
+  <label>Select a sport or create a new one!</label><br>
+  <select name="sport_name" required>
+    <option>Existing Sports</option>
+    <option value="">Create New Sport</option>
+    <% @sports.each do |sport| %>
+      <option value="<%= sport.name %>"><%= sport.name %></option>
+    <% end %>
+  </select>
+
+  <input type="text" name="new_sport" placeholder="New Sport">
+  
+  <br><br>
+  
+  <select name="trip[state_id]" required>
+    <option value="">Select a State</option>
+    <% @states.each do |state| %>
+      <option value="<%= state.id %>"><%= state.name %></option>
+    <% end %>
+  </select>
+  
+  <br><br>
+
+  <input type="hidden" name="trip[user_id]" value="<%= @user.id %>">
+  <input type="submit" name="submit">
+  
+
+</form>
