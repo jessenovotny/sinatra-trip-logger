@@ -1,8 +1,7 @@
-<!-- shows all trips in a state. receives @state -->
-
 All trips in <%= @state.name %>:
 
 <form action="/trips/<%= @state.slug %>/sport" method="post">
+
   <select name="sport_id">
     <% @sports.each do |sport| %>
       <option value="<%= sport.id %>"><%= sport.name %></option>
@@ -11,9 +10,8 @@ All trips in <%= @state.name %>:
   <button type="submit">Filter further by Sport:</button>
 </form>
 
-
 <ol>
-<% @state.trips.each do |trip| %>
+<% @trips.each do |trip| %>
   <li><%= trip.user.username %> logged:</li>
   "<%= trip.about %>"<br>
   See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips</p><br>

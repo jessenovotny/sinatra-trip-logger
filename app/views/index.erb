@@ -1,7 +1,3 @@
-<!-- Trip logger homepage. 
-Links to login, signup or logout depending on whether user is logged in or not. "Login or Sign Up to Start Logging Trips Today!"
-Shows all trips
- -->
 <% if logged_in? %>
   <h2>Welcome <%= current_user.username %>!</h2>
   <a href="/trip/new">Log New Trip</a><br>
@@ -36,8 +32,12 @@ Shows all trips
 <h3>All Trips</h3>
 <ol>
 <% @trips.each do |trip| %>
-  <li><%= trip.user.username %> in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a>:</li>
+  <li><a href="/user/<%= trip.user.slug %>"><%= trip.user.username %></a> in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a>:</li>
   "<%= trip.about %>"<br>
-  See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips</p><br>
+  See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips<br>
+  <% if current_user == trip.user %>
+    <a href="/trip/<%= trip.id %>/edit">Edit</a> or <a href="/trip/<%= trip.id %>/delete">Delete</a> trip
+  <% end %></p>
+
 <% end %>
 </ol>

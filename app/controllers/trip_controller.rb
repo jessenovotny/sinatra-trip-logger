@@ -56,10 +56,10 @@ class TripController < ApplicationController
 
   get '/trips/by-state/:state' do
     @state = State.find_by_slug(params[:state])
+
+    @trips = Array.new(Trip.where('state_id = ?', @state.id))
     @sports = []
-    Trip.all.each do |trip|
-      @sports << trip.sport if trip.state == @state
-    end
+    @trips.map{|trip| @sports << trip.sport if trip.state == @state}
     @sports.uniq!
     erb :'trips/by_state'
   end
@@ -73,10 +73,11 @@ class TripController < ApplicationController
 
   get '/trips/by-sport/:sport' do
     @sport = Sport.find_by_slug(params[:sport])
+    @trips = []
+    @trips << Trip.where('sport_id = ?', @sport.id)
+    @trips.flatten!
     @states = []
-    Trip.all.each do |trip|
-      @states << trip.state if trip.sport == @sport
-    end
+    @trips.each{|trip| @states << trip.state if trip.sport == @sport}
     @states.uniq!
     erb :'/trips/by_sport'
   end
@@ -98,6 +99,9 @@ class TripController < ApplicationController
   get '/trips/:sport/:state' do
     @sport = Sport.find_by_slug(params[:sport])
     @state = State.find_by_slug(params[:state])
+    @trips = []
+    @trips << Trip.where('sport_id = ? AND state_id = ?', @sport.id, @state.id)
+    @trips.flatten!
     erb :'trips/sport_state'
   end
 
