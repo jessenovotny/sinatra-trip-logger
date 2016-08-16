@@ -29,13 +29,12 @@ class UserController < ApplicationController
 
   post '/signup' do
     if !params[:user][:username].empty? && !params[:user][:email].empty? && !params[:user][:password].empty?
-      binding.pry
       user = User.create(params[:user])
       login(params[:user][:username], params[:user][:password])
-      # flash[:message] = "Account successfully created"
+      flash[:message] = "Account successfully created"
       redirect "/"
     else
-      # flash[:message] = "Please enter a valid username, email, and password."
+      flash[:message] = "Please enter a valid username, email, and password."
       redirect "/signup"
     end
   end

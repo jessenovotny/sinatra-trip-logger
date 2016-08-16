@@ -10,8 +10,7 @@ users = {
 }
 
 users.each do |name, details_hash|
-  u = User.new
-  u.username = name
+  u = User.create(username: name, password: "password")
   u.bio = details_hash[:bio]
   u.hometown = details_hash[:hometown]
   u.save
@@ -27,7 +26,7 @@ sports = [
   "Road Biking",
   "Bike Touring",
   "Running",
-  "Road Trip",
+  "Road Tripping",
   "Sky Diving",
   "Parasailing",
   "Surfing",
@@ -118,14 +117,32 @@ trips = {
     user: "Craig Milton", sport: "Running", state: "Nevada"},
   "My friend Josh showed me how to climb trad in Sedona" => {
     user: "Mary Poppins", sport: "Rock Climbing", state: "Arizona"},
+  "Took a 30 foot whipper climbing in Yosemite yesterday." => {
+    user: "The Dude", sport: "Rock Climbing", state: "California"},
+  "Absolutely the best granite slabs I've ever touched!" => {
+    user: "Agent Smith", sport: "Rock Climbing", state: "California"},
+  "I can't believe how much good rock there is out here!" => {
+    user: "Mary Poppins", sport: "Rock Climbing", state: "Arizona"},
+  "Tried parasailing for the first time today. What a rush." => {
+    user: "Mary Poppins", sport: "Parasailing", state: "California"},
+  "Went running this morning and stepped in dog shit" => {
+    user: "Agent Smith", sport: "Running", state: "Arizona"},
+  "Grabbed a bunch of buddies and we're headed to Las Vegas!" => {
+    user: "The Dude", sport: "Road Tripping", state: "Nevada"},
+  "After a weekend in Las Vegas, we made a loop around New Mexico so explore some local crags." => {
+    user: "The Dude", sport: "Rock Climbing", state: "New Mexico"},
+  "I broke my bike. It's okay, I'll buy another one." => {
+    user: "Kesha", sport: "Mountain Biking", state: "California"},
+  "Damn it feels good to be a gangster" => {
+    user: "Mary Poppins", sport: "Rock Climbing", state: "California"},
+  "The single track out here is phenomenal. Caught so crazy air coming down the mountain." => {
+    user: "Craig Milton", sport: "Mountain Biking", state: "New Mexico"}
 }
 
 trips.each do |about, details_hash|
-  t = Trip.new
-  t.about = about
-  t.user_id = User.find_by(username: details_hash[:user]).id
-  t.sport_id = Sport.find_by(name: details_hash[:sport]).id
-  t.state_id = State.find_by(name: details_hash[:state]).id
-  t.save
+  trip = Trip.create(about: about)
+  trip.user_id = User.find_by(username: details_hash[:user]).id
+  trip.sport_id = Sport.find_by(name: details_hash[:sport]).id
+  trip.state_id = State.find_by(name: details_hash[:state]).id
+  trip.save
 end 
-
