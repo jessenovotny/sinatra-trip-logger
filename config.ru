@@ -9,7 +9,5 @@ use Rack::MethodOverride
 
 use UserController
 use TripController
-use SportController
-use StateController
 
 run ApplicationController

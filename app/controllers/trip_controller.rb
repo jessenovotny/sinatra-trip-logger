@@ -45,8 +45,19 @@ class TripController < ApplicationController
   end
 
   post '/trip/:trip_id/edit' do
-    binding.pry
-    #update trip
+    if params[:trip][:about].empty? && params[:sport_name].empty? && params[:new_sport].empty?
+      redirect "/trip/#{params[:trip_id]}/edit"
+    else 
+      @trip = Trip.find(params[:trip_id])
+      @trip.state_id = params[:trip][:state_id]
+      if params[:sport_name].empty?
+        @trip.sport_id = Sport.find_or_create_by(name: params[:new_sport]).id
+      else
+        @trip.sport_id = Sport.find_by(name: params[:sport_name]).id
+      end
+      @trip.save
+      redirect '/'
+    end
   end
 
   ### DELETE TRIP ###

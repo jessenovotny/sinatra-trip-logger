@@ -1,4 +1,6 @@
-All <%= @sport.name %> trips:
+<h1><a href="/">Trip Logger</a></h1>
+
+<h2>All <%= @sport.name %> trips:</h2>
 
 <form action="/trips/<%= @sport.slug %>/state" method="post">
   
@@ -12,7 +14,10 @@ All <%= @sport.name %> trips:
 
 <ol>
 <% @trips.each do |trip| %>
-  <li><%= trip.user.username %> in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a> logged:</li>
-  "<%= trip.about %>"</p><br>
+  <li><a href="/user/<%= trip.user.slug %>"><%= trip.user.username %></a> in <a href="/trips/by-state/<%= trip.state.slug %>"><%= trip.state.name %></a> logged:</li>
+  "<%= trip.about %>"<br>
+  <% if current_user == trip.user %>
+    <a href="/trip/<%= trip.id %>/edit">Edit</a> trip<br>
+  <% end %></p>
 <% end %>
 </ol>

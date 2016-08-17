@@ -1,3 +1,6 @@
+<h1><a href="/">Trip Logger</a></h1>
+
+
 All trips in <%= @state.name %>:
 
 <form action="/trips/<%= @state.slug %>/sport" method="post">
@@ -12,7 +15,7 @@ All trips in <%= @state.name %>:
 
 <ol>
 <% @trips.each do |trip| %>
-  <li><%= trip.user.username %> logged:</li>
+  <li><a href="/user/<%= trip.user.slug %>"><%= trip.user.username %></a> logged:</li>
   "<%= trip.about %>"<br>
   See more <a href="/trips/by-sport/<%= trip.sport.slug %>"><%= trip.sport.name %></a> trips</p><br>
 <% end %>
