@@ -42,6 +42,7 @@ class UserController < ApplicationController
   ### LOGOUT ###
   get '/logout' do
     logout if logged_in?
+    flash[:message] = "You have successfully logged out. Come back soon!"
     redirect '/'
   end
 
